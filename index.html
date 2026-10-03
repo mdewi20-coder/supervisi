@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laporan Hasil Supervisi Akademik</title>
+<style>
+:root{--bg:#f4f7f6;--card:#fff;--ink:#1d2b2a;--mut:#5d6d6b;--line:#d6e0de;--acc:#0f766e;--acc2:#e6f4f1;--warn:#b45309;--bad:#b91c1c;--ok:#15803d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+header.top{background:var(--acc);color:#fff;padding:22px 16px;text-align:center}
+header.top h1{margin:0 0 4px;font-size:1.25rem;letter-spacing:.3px}
+header.top p{margin:0;opacity:.9;font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
+h2{margin:0 0 12px;font-size:1.1rem;color:var(--acc)}
+h3{margin:16px 0 6px;font-size:1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+label{display:block;font-size:.82rem;color:var(--mut);margin-bottom:3px}
+input,select,textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff;color:var(--ink)}
+textarea{resize:vertical;min-height:52px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);border-color:var(--acc)}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{border:1px solid var(--line);padding:6px;vertical-align:top;text-align:left}
+th{background:var(--acc2);font-size:.82rem}
+td.c{text-align:center}
+.small{font-size:.85rem;color:var(--mut)}
+.btn{display:inline-block;border:0;border-radius:8px;padding:9px 14px;font:inherit;font-weight:600;cursor:pointer;background:var(--acc);color:#fff}
+.btn.sec{background:#fff;color:var(--acc);border:1px solid var(--acc)}
+.btn.del{background:#fff;color:var(--bad);border:1px solid var(--bad);padding:4px 9px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.result{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.stat{flex:1 1 150px;background:var(--acc2);border-radius:10px;padding:10px 14px}
+.stat b{display:block;font-size:1.4rem}
+.badge{display:inline-block;padding:2px 10px;border-radius:99px;font-weight:700;font-size:.85rem;background:#e5e7eb}
+.b-amat{background:#dcfce7;color:var(--ok)}.b-baik{background:#dbeafe;color:#1d4ed8}.b-cukup{background:#fef3c7;color:var(--warn)}.b-bina{background:#fee2e2;color:var(--bad)}
+.st-Meningkat{color:var(--ok);font-weight:700}.st-Tetap{color:var(--warn);font-weight:700}.st-Menurun{color:var(--bad);font-weight:700}
+details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0;background:#fbfdfc}
+summary{cursor:pointer;font-weight:600}
+.sign{display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:center;margin-top:10px}
+.sign div{padding-top:70px}
+.sign b{display:block;text-decoration:underline}
+.pshow{display:none}
+footer{text-align:center;color:var(--mut);font-size:.8rem;padding:20px}
+@media print{
+ body{background:#fff;font-size:11px}.noprint,header.top .noprint,.btns,.btn,details.panduan{display:none!important}
+ .card{border:0;padding:0;margin:10px 0;break-inside:auto}.pshow{display:block}
+ table{min-width:0}textarea,input,select{border:0;padding:0;appearance:none;-webkit-appearance:none}
+ .tw{overflow:visible}
+}
+</style>
+</head>
+<body>
+<header class="top">
+ <h1>LAPORAN HASIL SUPERVISI AKADEMIK</h1>
+ <p>Berbasis Analisis Perkembangan dan Tindak Lanjut Terukur</p>
+</header>
+<div class="wrap">
+
+<div class="card noprint" style="background:var(--acc2)">
+ <b>Cara pakai singkat:</b> isi Identitas → isi skor dan bukti observasi → isi matriks perkembangan → isi analisis &amp; tindak lanjut → klik <i>Tambahkan ke Rekap</i> untuk setiap guru. Data tersimpan otomatis di browser ini. Gunakan tombol <i>Cetak / Simpan PDF</i> untuk menghasilkan dokumen.
+</div>
+
+<div class="card">
+ <h2>A. Identitas Supervisi</h2>
+ <div class="grid" id="ident"></div>
+</div>
+
+<div class="card">
+ <details class="panduan" open>
+  <summary>B. Panduan Pengisian Format Laporan</summary>
+  <h3>1. Skor dan Bukti Observasi</h3>
+  <p>Setiap indikator diberi skor 1–4 (1 = Kurang, 2 = Cukup, 3 = Baik, 4 = Sangat Baik). Kolom bukti observasi wajib diisi dengan fakta yang teramati atau dokumen yang diperiksa, bukan kesan umum. Contoh: “Guru menggunakan dua metode aktif (diskusi dan demonstrasi) selama pembelajaran.”</p>
+  <h3>2. Kategori Nilai</h3>
+  <p class="small">Nilai = (skor perolehan ÷ skor maksimal) × 100</p>
+  <div class="tw"><table style="min-width:0"><tr><th>Nilai</th><th>Kategori</th><th>Keputusan</th></tr>
+   <tr><td>91 – 100</td><td>Amat Baik</td><td>Pertahankan dan jadikan praktik baik</td></tr>
+   <tr><td>81 – 90</td><td>Baik</td><td>Pembinaan penguatan</td></tr>
+   <tr><td>71 – 80</td><td>Cukup</td><td>Pembinaan terjadwal</td></tr>
+   <tr><td>≤ 70</td><td>Perlu Pembinaan</td><td>Pendampingan intensif dan supervisi ulang</td></tr></table></div>
+  <h3>3. Status Perkembangan</h3>
+  <div class="tw"><table style="min-width:0"><tr><th>Status</th><th>Makna / Kriteria Penetapan</th></tr>
+   <tr><td>Meningkat</td><td>Kondisi saat ini lebih baik dibanding temuan sebelumnya dan didukung bukti yang jelas.</td></tr>
+   <tr><td>Tetap</td><td>Kondisi saat ini sama dengan temuan sebelumnya sehingga strategi pembinaan perlu diubah.</td></tr>
+   <tr><td>Menurun</td><td>Kondisi saat ini lebih rendah dibanding temuan sebelumnya sehingga penyebab perlu segera ditelaah.</td></tr></table></div>
+  <h3>4. Analisis Penyebab</h3>
+  <div class="tw"><table style="min-width:0"><tr><th>Kategori Penyebab</th><th>Contoh</th></tr>
+   <tr><td>Kompetensi</td><td>Guru belum menguasai penyusunan asesmen diagnostik.</td></tr>
+   <tr><td>Sumber daya</td><td>Belum tersedia contoh modul ajar atau media yang memadai.</td></tr>
+   <tr><td>Waktu dan beban kerja</td><td>Tugas administrasi menyita waktu penyusunan perangkat.</td></tr>
+   <tr><td>Dukungan lingkungan</td><td>Belum ada pendampingan rekan sejawat atau diskusi KKG.</td></tr></table></div>
+  <h3>5. Rujukan ke RTL</h3>
+  <p>Aspek yang berstatus prioritas untuk dibina dituliskan pada kolom rujukan ke RTL, kemudian dirinci pada Format RTL Hasil Supervisi Akademik (skala prioritas, indikator terukur, checkpoint, dan status tindak lanjut).</p>
+ </details>
+</div>
+
+<div class="card">
+ <h2>A. Lembar Hasil Penilaian</h2>
+ <div class="tw"><table>
+  <thead><tr><th>No</th><th>Aspek</th><th>Indikator</th><th style="width:90px">Skor (1–4)</th><th style="width:28%">Bukti Observasi</th><th style="width:20%">Catatan</th></tr></thead>
+  <tbody id="nilaiBody"></tbody>
+ </table></div>
+ <div class="result">
+  <div class="stat">Jumlah skor<b id="rSkor">0 / 24</b></div>
+  <div class="stat">Nilai<b id="rNilai">0</b></div>
+  <div class="stat">Kategori<b id="rKat">-</b></div>
+ </div>
+ <p class="small" id="rKeputusan" style="margin:10px 0 0"></p>
+ <p class="small noprint" id="rWarn" style="color:var(--warn);margin:4px 0 0"></p>
+</div>
+
+<div class="card">
+ <h2>B. Matriks Perkembangan Antar-Siklus</h2>
+ <div class="tw"><table>
+  <thead><tr><th>No</th><th>Temuan Supervisi Sebelumnya</th><th>Kondisi Saat Ini</th><th style="width:130px">Status</th><th>Bukti</th><th>Keterangan</th><th class="noprint"></th></tr></thead>
+  <tbody id="matBody"></tbody>
+ </table></div>
+ <div class="btns"><button class="btn sec" data-act="addMat">+ Tambah baris</button></div>
+</div>
+
+<div class="card">
+ <h2>C. Analisis dan Tindak Lanjut</h2>
+ <div class="tw"><table>
+  <thead><tr><th>No</th><th>Aspek</th><th>Kekuatan Guru</th><th>Hal yang Perlu Dikembangkan</th><th style="width:150px">Analisis Penyebab</th><th>Rekomendasi Utama</th><th style="width:110px">Rujukan ke RTL</th><th class="noprint"></th></tr></thead>
+  <tbody id="anBody"></tbody>
+ </table></div>
+ <div class="btns"><button class="btn sec" data-act="addAn">+ Tambah baris</button></div>
+</div>
+
+<div class="card">
+ <h2>Pengesahan</h2>
+ <p class="small">Tanda tangan sebagai tanda bahwa hasil supervisi telah dikomunikasikan.</p>
+ <div class="sign">
+  <div>Kepala Sekolah / Supervisor<br><b id="sgKepsek">(.....................)</b><span id="sgNipK" class="small"></span></div>
+  <div>Guru yang Disupervisi<br><b id="sgGuru">(.....................)</b><span id="sgNipG" class="small"></span></div>
+ </div>
+</div>
+
+<div class="card">
+ <h2>D. Rekapitulasi Sekolah</h2>
+ <p class="small noprint">Setelah laporan satu guru selesai, klik tombol di bawah untuk memasukkannya ke rekap. Nilai, kategori, status perkembangan, dan aspek yang paling perlu dibina terisi otomatis. Setelah itu kosongkan/ganti data guru untuk guru berikutnya.</p>
+ <div class="tw"><table>
+  <thead><tr><th>No</th><th>Nama Guru</th><th>Nilai</th><th>Kategori</th><th>Status Perkembangan</th><th>Aspek yang Paling Perlu Dibina</th><th>Rencana Pembinaan</th><th class="noprint"></th></tr></thead>
+  <tbody id="rekapBody"></tbody>
+ </table></div>
+ <div class="btns">
+  <button class="btn" data-act="addRekap">+ Tambahkan guru ini ke Rekap</button>
+  <button class="btn sec" data-act="csv">Unduh Rekap (CSV)</button>
+ </div>
+ <div id="rekapSum" class="small" style="margin-top:12px"></div>
+</div>
+
+<div class="btns noprint" style="margin-bottom:24px">
+ <button class="btn" data-act="print">Cetak / Simpan PDF</button>
+ <button class="btn sec" data-act="newGuru">Mulai laporan guru baru (rekap tetap)</button>
+ <button class="btn sec" data-act="reset" style="color:var(--bad);border-color:var(--bad)">Hapus semua data</button>
+</div>
+</div>
+<footer>Format Laporan Hasil Supervisi Akademik Berbasis Analisis Perkembangan dan Tindak Lanjut Terukur</footer>
+
+<script>
+(function(){
+var IDENT=[["sekolah","Nama Sekolah"],["npsn","NPSN"],["alamat","Alamat Sekolah"],["kepsek","Nama Kepala Sekolah / Supervisor"],["nipKepsek","NIP Kepala Sekolah / Supervisor"],["guru","Nama Guru yang Disupervisi"],["nipGuru","NIP Guru"],["kelas","Mata Pelajaran / Kelas yang Diampu"],["tahun","Semester / Tahun Ajaran"],["siklus","Siklus Supervisi ke"],["tanggal","Tanggal Pelaksanaan Supervisi","date"]];
+var INDIK=[["Perencanaan","Tujuan pembelajaran dan modul ajar sesuai capaian pembelajaran"],["Perencanaan","Rancangan asesmen dan pembelajaran berdiferensiasi"],["Pelaksanaan","Kegiatan pendahuluan, inti, dan penutup"],["Pelaksanaan","Metode, media, dan keterlibatan siswa"],["Penilaian","Teknik penilaian dan umpan balik"],["Penilaian","Analisis hasil serta remedial / pengayaan"]];
+var SEBAB=["","Kompetensi","Sumber daya","Waktu dan beban kerja","Dukungan lingkungan"];
+var KEY="supervisi_akademik_v1";
+function blankMat(){return{prev:"",now:"",status:"",bukti:"",ket:""}}
+function blankAn(){return{aspek:"",kuat:"",kembang:"",sebab:"",rek:"",rtl:""}}
+function fresh(keepRekap){
+ var s={ident:{},skor:INDIK.map(function(){return 0}),bukti:INDIK.map(function(){return""}),catatan:INDIK.map(function(){return""}),mat:[1,2,3,4].map(blankMat),an:[1,2,3,4].map(blankAn),rekap:[]};
+ if(keepRekap&&S)s.rekap=S.rekap; return s}
+var S=null;
+try{S=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){S=null}
+if(!S||!S.ident)S=fresh(false);
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function esc(v){return String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function $(id){return document.getElementById(id)}
+
+function renderIdent(){
+ $("ident").innerHTML=IDENT.map(function(f){
+  return '<div><label>'+f[1]+'</label><input type="'+(f[2]||"text")+'" data-s="ident" data-f="'+f[0]+'" value="'+esc(S.ident[f[0]])+'"></div>'}).join("")}
+function renderNilai(){
+ $("nilaiBody").innerHTML=INDIK.map(function(r,i){
+  var opts=[0,1,2,3,4].map(function(n){return '<option value="'+n+'"'+(S.skor[i]==n?" selected":"")+'>'+(n||"–")+'</option>'}).join("");
+  return '<tr><td class="c">'+(i+1)+'</td><td>'+r[0]+'</td><td>'+r[1]+'</td><td><select data-s="skor" data-i="'+i+'">'+opts+'</select></td>'+
+  '<td><textarea data-s="bukti" data-i="'+i+'" placeholder="Fakta yang teramati / dokumen yang diperiksa">'+esc(S.bukti[i])+'</textarea></td>'+
+  '<td><textarea data-s="catatan" data-i="'+i+'">'+esc(S.catatan[i])+'</textarea></td></tr>'}).join("")}
+function stOpts(v){return ["","Meningkat","Tetap","Menurun"].map(function(o){return '<option value="'+o+'"'+(v===o?" selected":"")+'>'+(o||"Pilih…")+'</option>'}).join("")}
+function renderMat(){
+ $("matBody").innerHTML=S.mat.map(function(r,i){
+  return '<tr><td class="c">'+(i+1)+'</td>'+
+  '<td><textarea data-s="mat" data-i="'+i+'" data-f="prev">'+esc(r.prev)+'</textarea></td>'+
+  '<td><textarea data-s="mat" data-i="'+i+'" data-f="now">'+esc(r.now)+'</textarea></td>'+
+  '<td><select data-s="mat" data-i="'+i+'" data-f="status">'+stOpts(r.status)+'</select></td>'+
+  '<td><textarea data-s="mat" data-i="'+i+'" data-f="bukti">'+esc(r.bukti)+'</textarea></td>'+
+  '<td><textarea data-s="mat" data-i="'+i+'" data-f="ket">'+esc(r.ket)+'</textarea></td>'+
+  '<td class="noprint"><button class="btn del" data-act="delMat" data-i="'+i+'" title="Hapus baris">×</button></td></tr>'}).join("")}
+function renderAn(){
+ $("anBody").innerHTML=S.an.map(function(r,i){
+  var so=SEBAB.map(function(o){return '<option value="'+o+'"'+(r.sebab===o?" selected":"")+'>'+(o||"Pilih…")+'</option>'}).join("");
+  var ro=["","1","2","3"].map(function(o){return '<option value="'+o+'"'+(r.rtl===o?" selected":"")+'>'+(o?"Prioritas "+o:"–")+'</option>'}).join("");
+  function ta(f){return '<td><textarea data-s="an" data-i="'+i+'" data-f="'+f+'">'+esc(r[f])+'</textarea></td>'}
+  return '<tr><td class="c">'+(i+1)+'</td>'+ta("aspek")+ta("kuat")+ta("kembang")+
+  '<td><select data-s="an" data-i="'+i+'" data-f="sebab">'+so+'</select></td>'+ta("rek")+
+  '<td><select data-s="an" data-i="'+i+'" data-f="rtl">'+ro+'</select></td>'+
+  '<td class="noprint"><button class="btn del" data-act="delAn" data-i="'+i+'" title="Hapus baris">×</button></td></tr>'}).join("")}
+
+function kategori(n){
+ if(n>=91)return["Amat Baik","b-amat","Pertahankan dan jadikan praktik baik"];
+ if(n>=81)return["Baik","b-baik","Pembinaan penguatan"];
+ if(n>=71)return["Cukup","b-cukup","Pembinaan terjadwal"];
+ return["Perlu Pembinaan","b-bina","Pendampingan intensif dan supervisi ulang"]}
+function hitung(){
+ var tot=S.skor.reduce(function(a,b){return a+Number(b)},0), max=INDIK.length*4;
+ var terisi=S.skor.filter(function(x){return Number(x)>0}).length;
+ var nilai=Math.round(tot/max*100);
+ return{tot:tot,max:max,nilai:nilai,terisi:terisi,kat:kategori(nilai)}}
+function statusUmum(){
+ var c={Meningkat:0,Tetap:0,Menurun:0},n=0;
+ S.mat.forEach(function(r){if(c[r.status]!=null){c[r.status]++;n++}});
+ if(!n)return"-";
+ var best="Tetap",bv=-1;["Meningkat","Tetap","Menurun"].forEach(function(k){if(c[k]>bv){bv=c[k];best=k}});
+ var ties=["Meningkat","Tetap","Menurun"].filter(function(k){return c[k]===bv});
+ return ties.length>1?"Tetap":best}
+function aspekLemah(){
+ var vals=S.skor.map(Number),filled=vals.filter(function(v){return v>0});
+ if(!filled.length)return"-";
+ var mn=Math.min.apply(null,filled);
+ if(mn===4)return"-";
+ var out=[];
+ INDIK.forEach(function(r,i){if(Number(S.skor[i])===mn&&out.indexOf(r[0])<0)out.push(r[0])});
+ return out.join(", ")}
+function updateHasil(){
+ var h=hitung();
+ $("rSkor").textContent=h.tot+" / "+h.max;
+ $("rNilai").textContent=h.terisi?h.nilai:0;
+ $("rKat").innerHTML=h.terisi?'<span class="badge '+h.kat[1]+'">'+h.kat[0]+'</span>':"-";
+ $("rKeputusan").textContent=h.terisi?"Keputusan: "+h.kat[2]:"";
+ $("rWarn").textContent=h.terisi&&h.terisi<INDIK.length?"Baru "+h.terisi+" dari "+INDIK.length+" indikator yang diberi skor.":"";
+ $("sgKepsek").textContent=S.ident.kepsek||"(.....................)";
+ $("sgGuru").textContent=S.ident.guru||"(.....................)";
+ $("sgNipK").textContent=S.ident.nipKepsek?"NIP. "+S.ident.nipKepsek:"";
+ $("sgNipG").textContent=S.ident.nipGuru?"NIP. "+S.ident.nipGuru:""}
+function renderRekap(){
+ $("rekapBody").innerHTML=S.rekap.length?S.rekap.map(function(r,i){
+  var k=kategori(r.nilai);
+  return '<tr><td class="c">'+(i+1)+'</td><td>'+esc(r.nama)+'</td><td class="c">'+r.nilai+'</td><td><span class="badge '+k[1]+'">'+k[0]+'</span></td>'+
+  '<td class="st-'+esc(r.status)+'">'+esc(r.status)+'</td><td>'+esc(r.aspek)+'</td>'+
+  '<td><textarea data-s="rekap" data-i="'+i+'" data-f="rencana" placeholder="Mis. KKG, IHT, pendampingan rekan sejawat">'+esc(r.rencana)+'</textarea></td>'+
+  '<td class="noprint"><button class="btn del" data-act="delRekap" data-i="'+i+'" title="Hapus">×</button></td></tr>'}).join("")
+  :'<tr><td colspan="8" class="small" style="text-align:center">Belum ada guru dalam rekap.</td></tr>';
+ var sum="";
+ if(S.rekap.length){
+  var cnt={},ct={};
+  S.rekap.forEach(function(r){
+   String(r.aspek).split(", ").forEach(function(a){if(a&&a!=="-")cnt[a]=(cnt[a]||0)+1});
+   var kt=kategori(r.nilai)[0];ct[kt]=(ct[kt]||0)+1});
+  var arr=Object.keys(cnt).sort(function(a,b){return cnt[b]-cnt[a]});
+  var avg=Math.round(S.rekap.reduce(function(a,r){return a+r.nilai},0)/S.rekap.length);
+  sum="<b>Ringkasan sekolah:</b> "+S.rekap.length+" guru, rata-rata nilai "+avg+". ";
+  sum+=Object.keys(ct).map(function(k){return ct[k]+" "+k}).join(", ")+". ";
+  if(arr.length)sum+="Aspek yang paling banyak perlu dibina: <b>"+esc(arr[0])+"</b> ("+cnt[arr[0]]+" guru) — jadikan prioritas program pelatihan sekolah (IHT)."}
+ $("rekapSum").innerHTML=sum}
+
+function autogrow(el){if(el.tagName==="TEXTAREA"){el.style.height="auto";el.style.height=Math.max(52,el.scrollHeight)+"px"}}
+function growAll(){document.querySelectorAll("textarea").forEach(autogrow)}
+function renderAll(){renderIdent();renderNilai();renderMat();renderAn();renderRekap();updateHasil();growAll()}
+
+function onChange(e){
+ var el=e.target,s=el.dataset.s;if(!s)return;
+ var i=el.dataset.i,f=el.dataset.f,v=el.value;
+ if(s==="ident")S.ident[f]=v;
+ else if(s==="skor")S.skor[i]=Number(v);
+ else if(s==="bukti"||s==="catatan")S[s][i]=v;
+ else if(s==="mat")S.mat[i][f]=v;
+ else if(s==="an")S.an[i][f]=v;
+ else if(s==="rekap")S.rekap[i][f]=v;
+ autogrow(el);save();updateHasil();
+ if(s==="rekap"&&f!=="rencana")renderRekap()}
+document.addEventListener("input",onChange);
+document.addEventListener("change",onChange);
+
+function csvCell(v){return '"'+String(v==null?"":v).replace(/"/g,'""')+'"'}
+document.addEventListener("click",function(e){
+ var b=e.target.closest("[data-act]");if(!b)return;
+ var a=b.dataset.act,i=Number(b.dataset.i);
+ if(a==="addMat"){S.mat.push(blankMat());renderMat();growAll()}
+ else if(a==="delMat"){if(S.mat.length>1){S.mat.splice(i,1);renderMat();growAll()}}
+ else if(a==="addAn"){S.an.push(blankAn());renderAn();growAll()}
+ else if(a==="delAn"){if(S.an.length>1){S.an.splice(i,1);renderAn();growAll()}}
+ else if(a==="delRekap"){S.rekap.splice(i,1);renderRekap()}
+ else if(a==="addRekap"){
+  var h=hitung();
+  if(!S.ident.guru){alert("Isi dulu Nama Guru yang Disupervisi di bagian Identitas.");return}
+  if(!h.terisi){alert("Isi dulu skor penilaian.");return}
+  var ada=S.rekap.some(function(r){return r.nama===S.ident.guru});
+  if(ada&&!confirm("Guru ini sudah ada di rekap. Tambahkan lagi?"))return;
+  S.rekap.push({nama:S.ident.guru,nilai:h.nilai,status:statusUmum(),aspek:aspekLemah(),rencana:""});
+  renderRekap()}
+ else if(a==="csv"){
+  var rows=[["No","Nama Guru","Nilai","Kategori","Status Perkembangan","Aspek yang Paling Perlu Dibina","Rencana Pembinaan"]];
+  S.rekap.forEach(function(r,k){rows.push([k+1,r.nama,r.nilai,kategori(r.nilai)[0],r.status,r.aspek,r.rencana])});
+  var csv="\ufeff"+rows.map(function(r){return r.map(csvCell).join(",")}).join("\r\n");
+  var blob=new Blob([csv],{type:"text/csv;charset=utf-8"}),u=URL.createObjectURL(blob),l=document.createElement("a");
+  l.href=u;l.download="rekap-supervisi.csv";document.body.appendChild(l);l.click();l.remove();URL.revokeObjectURL(u)}
+ else if(a==="print"){growAll();window.print()}
+ else if(a==="newGuru"){
+  if(confirm("Kosongkan form laporan untuk guru berikutnya? Data rekap sekolah tetap tersimpan. Identitas sekolah dan supervisor dipertahankan.")){
+   var keep=S.ident,rk=S.rekap;S=fresh(false);S.rekap=rk;
+   ["sekolah","npsn","alamat","kepsek","nipKepsek","tahun","siklus","tanggal"].forEach(function(k){S.ident[k]=keep[k]||""});
+   save();renderAll();window.scrollTo(0,0)}}
+ else if(a==="reset"){
+  if(confirm("Hapus SEMUA data (termasuk rekap)? Tindakan ini tidak bisa dibatalkan.")){S=fresh(false);save();renderAll();window.scrollTo(0,0)}}
+});
+renderAll();
+window.addEventListener("beforeprint",growAll);
+})();
+</script>
+</body>
+</html>
